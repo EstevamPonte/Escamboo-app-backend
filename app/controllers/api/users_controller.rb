@@ -35,6 +35,12 @@ class Api::UsersController < ApplicationController
     user.destroy
   end
 
+  def index
+    users = User.all
+    byebug
+    render json: { users: users }, status: 200
+  end
+
   private
 
   def user_params

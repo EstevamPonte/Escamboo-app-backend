@@ -10,6 +10,16 @@ RSpec.describe 'Users API', type: :request do
     }
   end
 
+  describe 'GET /users' do
+    before do
+      create_list(:user, 5)
+      get '/users', params: {}, headers: headers
+    end
+    it 'retuns status code 200' do
+      expect(response).to have_http_status(200)
+    end
+  end
+
   describe "GET /users/:id" do
     before do
       get "/users/#{user_id}", params: {}, headers: headers 
