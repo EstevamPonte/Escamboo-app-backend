@@ -37,7 +37,7 @@ class Api::UsersController < ApplicationController
 
   def index
     users = User.all
-    byebug
+    # byebug
     render json: { users: users }, status: 200
   end
 
