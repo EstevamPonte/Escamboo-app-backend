@@ -37,13 +37,13 @@ class Api::UsersController < ApplicationController
 
   def index
     users = User.all
-    # byebug
+    byebug
     render json: { users: users }, status: 200
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :name, :address, :password, :password_confirmation)
+    params.require(:user).permit(:email, :name, :address, :password, :password_confirmation, :escamboos, :phone, :city)
   end
 end
