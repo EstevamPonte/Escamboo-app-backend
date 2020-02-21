@@ -6,7 +6,9 @@ RSpec.describe 'Users API', type: :request do
 
   let (:headers) do 
     {
-      "Accept" => "application/vnd.escamboo"
+      "Accept" => "application/vnd.escamboo",
+      'Content-Type' => Mime[:json].to_s,
+      'Authorization' => user.auth_token
     }
   end
 
@@ -45,7 +47,7 @@ RSpec.describe 'Users API', type: :request do
 
   describe 'POST /users' do
     before do
-        post '/users', params: { user: user_params }, headers: headers
+        post '/users', params: { user: user_params }.to_json, headers: headers
     end
 
     context 'when the request params are valid' do
@@ -75,7 +77,7 @@ RSpec.describe 'Users API', type: :request do
 
   describe 'PUT /users/:id' do
     before do
-      put "/users/#{user_id}", params: { user: user_params }, headers: headers
+      put "/users/#{user_id}", params: { user: user_params }.to_json, headers: headers
     end
 
     context 'when the request params are valid' do
