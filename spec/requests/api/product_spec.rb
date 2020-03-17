@@ -83,4 +83,44 @@ RSpec.describe 'Product API' do
     end
   end
 
+  describe 'PUT /products/:id' do
+    let!(:product) { create(:product, user_id: user.id) }
+
+    before do
+      put "/products/#{product.id}", params: { product: product_params }.to_json, headers: headers
+    end
+
+    context 'When the params are valid' do
+      let(:product_params){ {name: 'new product name'} }
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'returns the json for updated product' do
+        expect(json_body[:name]).to eq(product_params[:name])
+      end
+
+      it 'update the product in the database' do
+        expect( Product.find_by(name: product_params[:name]) ).not_to be_nil
+      end
+    end
+
+    context 'When the params are invalid' do
+      let(:product_params) { { name: ' ' } }
+
+      it 'return status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns the json error for name' do
+        expect(json_body[:errors]).to have_key(:name)
+      end
+
+      it 'does not update the product in the database' do
+        expect( Product.find_by(name: product_params[:name]) ).to be_nil
+      end
+    end
+  end
+
 end

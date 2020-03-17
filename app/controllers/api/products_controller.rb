@@ -22,6 +22,16 @@ class Api::ProductsController < ApplicationController
     end
   end
 
+  def update
+    product = current_user.products.find(params[:id])
+
+    if product.update_attributes(product_params)
+      render json: product, status: 200
+    else
+      render json: { errors: product.errors }, status: 422
+    end
+  end
+
   private
 
   def product_params
