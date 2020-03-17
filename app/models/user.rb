@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates_uniqueness_of :auth_token
   before_create :generate_authentication_token!
 
-  has_many :product, dependent: :destroy
+  has_many :products, dependent: :destroy
 
   def info
     "#{email} - #{created_at} - Token: #{Devise.friendly_token}"

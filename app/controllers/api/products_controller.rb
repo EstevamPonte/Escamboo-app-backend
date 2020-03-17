@@ -3,7 +3,12 @@ class Api::ProductsController < ApplicationController
 
 
   def index
-    products = current_user.product
+    products = current_user.products
     render json: { products: products }, status: 200
+  end
+
+  def show 
+    task = current_user.products.find(params[:id])
+    render json: task, status: 200
   end
 end
