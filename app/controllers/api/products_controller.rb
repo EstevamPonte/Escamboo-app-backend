@@ -8,7 +8,23 @@ class Api::ProductsController < ApplicationController
   end
 
   def show 
-    task = current_user.products.find(params[:id])
-    render json: task, status: 200
+    products = current_user.products.find(params[:id])
+    render json: products, status: 200
+  end
+
+  def create
+    product = current_user.products.build(product_params)
+
+    if product.save
+      render json: product, status: 201
+    else
+      render json: { errors: product.errors }, status: 422
+    end
+  end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:name, :description, :escamboos, :category)
   end
 end
