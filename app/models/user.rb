@@ -8,6 +8,7 @@ class User < ApplicationRecord
   before_create :generate_authentication_token!
 
   has_many :products, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   def info
     "#{email} - #{created_at} - Token: #{Devise.friendly_token}"
