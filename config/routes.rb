@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json }, constraints: ApiVersionConstraint.new(), path: '/' do
     resources :users, only: [:show, :create, :update, :destroy, :index]
     resources :sessions, only: [:create, :destroy]
-    resources :products, only: [:index, :show, :create, :update]
+    resources :products, only: [:index, :show, :create, :update, :destroy]
   end
 end
