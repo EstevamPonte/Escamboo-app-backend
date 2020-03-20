@@ -22,7 +22,7 @@ class Api::LikesController < ApplicationController
     #     allLikes.push(a)
     #   end
     # }
-    oderlikes = likes.find_by(product_id: current_user.products)
+    # oderlikes = likes.find_by(product_id: current_user.products)
     # myLikes = current_user.likes
     render json: likes, status: 200
   end
