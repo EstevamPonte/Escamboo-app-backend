@@ -2,7 +2,7 @@ class Api::RoomsController < ApplicationController
   before_action :authenticate_with_token!
 
   def index
-    @rooms = Room.where("idUser1_id = ? OR idUser2_id = ?", current_user.id, current_user.id)
+    @rooms = Room.where("rooms.idUser1_id = ? OR rooms.idUser2_id = ?", current_user.id, current_user.id)
     render json: @rooms , status: 200
   end
 
