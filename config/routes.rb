@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index, :show, :create, :update, :destroy]
     resources :usersproducts, only: [:index, :show]
     resources :likes, only: [:index, :create, :destroy]
-    resources :room_messages, only: [:index, :create]
+    resources :room_messages, only: [:show, :create]
     resources :rooms, only: [:index, :create]
   end
 end

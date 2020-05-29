@@ -1,8 +1,8 @@
 class Api::RoomMessagesController < ApplicationController
   before_action :authenticate_with_token!
 
-  def index
-    room = Room.find_by(id: message_params[:room_id])
+  def show
+    room = Room.find_by(id: params[:id])
     render json: room.room_messages, status: 200
   end
 
